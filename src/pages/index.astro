@@ -1,100 +1,225 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 
-const products = [
-  {
-    name: 'Po Dusche / Intimdusche',
-    category: 'Körperpflege',
-    price: '€9,90',
-    originalPrice: null,
-    href: '/intimdusche',
-    image: 'img/B0F28TW95V/B0F28TW95V_main.jpg',
-    asin: 'B0F28TW95V'
-  },
-  {
-    name: 'Gusseiserne Brotbackform',
-    category: 'Küche',
-    price: 'ab €45,91',
-    originalPrice: '€49,90',
-    href: '/gusseisen',
-    image: 'img/B0F23MWKYL/B0F23MWKYL_main.jpg',
-    asin: 'B0F23MWKYL'
-  },
-  {
-    name: 'Pizza Gleitschieber 12-Zoll',
-    category: 'Küche',
-    price: '€39,90',
-    originalPrice: '€49,90',
-    href: '/pizza',
-    image: 'img/B0DHZH73KP/B0DHZH73KP_main.jpg',
-    asin: 'B0DHZH73KP'
-  }
+const intimduscheVariants = [
+  { asin: 'B0F28TW95V', color: 'Rot', price: '€9,90', img: '/img/B0F28TW95V/B0F28TW95V_main.jpg', colorHex: '#ef4444' },
+  { asin: 'B0F28T7WFL', color: 'Blau', price: '€9,90', img: '/img/B0F28T7WFL/B0F28T7WFL_main.jpg', colorHex: '#3b82f6' }
+];
+
+const gusseisenVariants = [
+  { asin: 'B0F23MWKYL', color: 'Schwarz', price: '€45,91', orig: '€49,90', img: '/img/B0F23MWKYL/B0F23MWKYL_main.jpg', colorHex: '#1a1a1a' },
+  { asin: 'B0F3THDT9B', color: 'Meeresblau', price: '€55,11', orig: '€59,90', img: '/img/B0F3THDT9B/B0F3THDT9B_main.jpg', colorHex: '#0ea5e9' },
+  { asin: 'B0F3TFB1VK', color: 'Mintblau', price: '€55,11', orig: '€59,90', img: '/img/B0F3TFB1VK/B0F3TFB1VK_main.jpg', colorHex: '#14b8a6' }
 ];
 ---
 
 <BaseLayout
-  title="An & Guo | Qualitätsprodukte für Körperpflege und Küche"
-  description="An & Guo bietet hochwertige Intimduschen und Küchenprodukte für den täglichen Gebrauch. BPA-frei, hitzebeständig und nachhaltig."
+  title="Intimdusche, Gusseisen Brotbackform & Pizza Zubehör kaufen | An & Guo"
+  description="An & Guo – Hochwertige Intimdusche, Gusseisen Brotbackform und Pizza Zubehör online kaufen. BPA-frei, hitzebeständig, langlebig. Schneller Versand aus Deutschland."
 >
-  <main>
-    <div class="border-b border-gray-100">
-      <div class="max-w-7xl mx-auto px-6 py-4">
-        <nav class="flex items-center gap-2 text-sm text-gray-500">
-          <span class="text-[#1a1a1a]">Startseite</span>
-        </nav>
+  <style>
+    .product-card {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+    .product-card:hover {
+      box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+    }
+    .color-swatch {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      border: 2px solid #e5e7eb;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .color-swatch.active {
+      border-color: #1a1a1a;
+      box-shadow: 0 0 0 2px white, 0 0 0 4px #1a1a1a;
+    }
+    .color-swatch:hover {
+      border-color: #6b7280;
+    }
+  </style>
+
+  <!-- Hero -->
+  <section class="bg-gradient-to-b from-gray-50 to-white py-20 md:py-32">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="max-w-3xl">
+        <h1 class="text-4xl md:text-6xl font-bold text-[#1a1a1a] leading-tight mb-6">
+          Qualität für Ihren Alltag
+        </h1>
+        <p class="text-lg md:text-xl text-gray-600 leading-relaxed mb-8 max-w-2xl">
+          Hochwertige Küchenwerkzeuge und Körperpflegeprodukte. Entwickelt in Deutschland,
+          gefertigt für Langlebigkeit und Benutzerfreundlichkeit.
+        </p>
+        <a href="#produkte" class="inline-flex items-center gap-2 bg-[#166534] text-white px-8 py-4 rounded-lg font-medium hover:bg-gray-800 transition-colors">
+          Produkte entdecken
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+        </a>
       </div>
     </div>
+  </section>
 
-    <div class="max-w-7xl mx-auto px-6 py-16 md:py-24">
-      <h1 class="text-4xl md:text-5xl font-bold text-[#1a1a1a] mb-4">Qualität für<br>Ihr Zuhause</h1>
-      <p class="text-xl text-gray-600 mb-12 max-w-2xl">Intime Hygiene und Küchenzubehör – entwickelt für Komfort, designed für Deutschland.</p>
+  <!-- Products -->
+  <section id="produkte" class="py-20 md:py-28">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="mb-12">
+        <h2 class="text-3xl font-bold text-[#1a1a1a] mb-4">Unsere Produkte</h2>
+        <p class="text-gray-600">Entdecken Sie unsere sorgfältig ausgewählten Produktlinien.</p>
+      </div>
 
-      <div id="produkte" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-        {products.map((product) => (
-          <a href={product.href} class="group block bg-white rounded-2xl border border-gray-200 overflow-hidden hover:shadow-lg transition-shadow">
-            <div class="aspect-square bg-gray-50 flex items-center justify-center p-8">
-              <img src={product.image} alt={product.name} class="w-full h-full object-contain" loading="lazy">
+      <div class="grid md:grid-cols-3 gap-8">
+
+        <!-- Intimdusche -->
+        <a href="/intimdusche" class="product-card bg-white rounded-2xl border border-gray-200 overflow-hidden transition-all duration-300 hover:shadow-xl hover:border-gray-300 group">
+          <div class="aspect-square bg-white p-6 flex items-center justify-center relative overflow-hidden">
+            <img
+              id="img-intimdusche"
+              src={intimduscheVariants[0].img}
+              alt="Intimdusche"
+              class="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105"
+            >
+          </div>
+          <div class="p-6 flex flex-col flex-grow">
+            <div class="mb-4">
+              <p class="text-xs text-gray-500 uppercase tracking-wide mb-1">Körperpflege</p>
+              <h3 class="text-lg font-semibold text-[#1a1a1a] mb-1">Po Dusche / Intimdusche</h3>
+              <p class="text-sm text-gray-600">Das mobile Bidet für hygienische Intimreinigung</p>
             </div>
-            <div class="p-6">
-              <p class="text-xs text-gray-500 uppercase tracking-wide mb-1">{product.category}</p>
-              <h2 class="text-lg font-semibold text-[#1a1a1a] mb-1">{product.name}</h2>
-              <p class="text-xl font-bold text-[#1a1a1a]">
-                {product.price}
-                {product.originalPrice && <span class="text-sm text-gray-400 line-through ml-2">{product.originalPrice}</span>}
-              </p>
+            <div class="mb-4">
+              <div class="flex items-center gap-1 mb-3">
+                <svg class="w-4 h-4 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                <span class="text-sm font-medium text-[#1a1a1a]">5,0</span>
+                <span class="text-sm text-gray-500">(4)</span>
+              </div>
+              <div id="swatches-intimdusche" class="flex items-center gap-2 mb-3">
+                {intimduscheVariants.map((v, i) => (
+                  <button
+                    class={`color-swatch ${i === 0 ? 'active' : ''}`}
+                    style={`background-color: ${v.colorHex}`}
+                    title={v.color}
+                    onclick={`event.preventDefault(); selectColor('intimdusche', ${i})`}
+                  />
+                ))}
+              </div>
             </div>
-          </a>
-        ))}
+            <div class="mt-auto pt-4 border-t border-gray-200/80">
+              <div class="flex items-baseline justify-between">
+                <span id="price-intimdusche" class="text-2xl font-bold text-[#1a1a1a]">{intimduscheVariants[0].price}</span>
+                <span class="text-xs text-gray-500 group-hover:text-[#1a1a1a] transition-colors">Details →</span>
+              </div>
+            </div>
+          </div>
+        </a>
+
+        <!-- Gusseisen -->
+        <a href="/gusseisen" class="product-card bg-white rounded-2xl border border-gray-200 overflow-hidden transition-all duration-300 hover:shadow-xl hover:border-gray-300 group">
+          <div class="aspect-square bg-white p-6 flex items-center justify-center relative overflow-hidden">
+            <img
+              id="img-gusseisen"
+              src={gusseisenVariants[0].img}
+              alt="Gusseisen Brotbackform"
+              class="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105"
+            >
+          </div>
+          <div class="p-6 flex flex-col flex-grow">
+            <div class="mb-4">
+              <p class="text-xs text-gray-500 uppercase tracking-wide mb-1">Küche</p>
+              <h3 class="text-lg font-semibold text-[#1a1a1a] mb-1">Gusseisen Brotbackform</h3>
+              <p class="text-sm text-gray-600">Perfektes Brot, jedes Mal – mit Deckel</p>
+            </div>
+            <div class="mb-4">
+              <div class="flex items-center gap-1 mb-3">
+                <svg class="w-4 h-4 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                <span class="text-sm font-medium text-[#1a1a1a]">4,4</span>
+                <span class="text-sm text-gray-500">(19)</span>
+              </div>
+              <div id="swatches-gusseisen" class="flex items-center gap-2 mb-3">
+                {gusseisenVariants.map((v, i) => (
+                  <button
+                    class={`color-swatch ${i === 0 ? 'active' : ''}`}
+                    style={`background-color: ${v.colorHex}`}
+                    title={v.color}
+                    onclick={`event.preventDefault(); selectColor('gusseisen', ${i})`}
+                  />
+                ))}
+              </div>
+            </div>
+            <div class="mt-auto pt-4 border-t border-gray-200/80">
+              <div class="flex items-baseline justify-between">
+                <div>
+                  <span id="price-gusseisen" class="text-2xl font-bold text-[#1a1a1a]">{gusseisenVariants[0].price}</span>
+                  <span id="orig-gusseisen" class="text-sm text-gray-400 line-through ml-2">{gusseisenVariants[0].orig}</span>
+                </div>
+                <span class="text-xs text-gray-500 group-hover:text-[#1a1a1a] transition-colors">Details →</span>
+              </div>
+            </div>
+          </div>
+        </a>
+
+        <!-- Pizza -->
+        <a href="/pizza" class="product-card bg-white rounded-2xl border border-gray-200 overflow-hidden transition-all duration-300 hover:shadow-xl hover:border-gray-300 group">
+          <div class="aspect-square bg-white p-6 flex items-center justify-center relative overflow-hidden">
+            <img
+              src="/img/B0DHZH73KP/B0DHZH73KP_main.jpg"
+              alt="Pizza Gleitschieber"
+              class="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105"
+            >
+          </div>
+          <div class="p-6 flex flex-col flex-grow">
+            <div class="mb-4">
+              <p class="text-xs text-gray-500 uppercase tracking-wide mb-1">Küche</p>
+              <h3 class="text-lg font-semibold text-[#1a1a1a] mb-1">Pizza Gleitschieber</h3>
+              <p class="text-sm text-gray-600">12-Zoll, mit Wiegemesser und Bambusgriff</p>
+            </div>
+            <div class="mb-4">
+              <div class="flex items-center gap-1 mb-3">
+                <svg class="w-4 h-4 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                <span class="text-sm font-medium text-[#1a1a1a]">4,1</span>
+                <span class="text-sm text-gray-500">(34)</span>
+              </div>
+              <div class="h-8 mb-3"></div>
+            </div>
+            <div class="mt-auto pt-4 border-t border-gray-200/80">
+              <div class="flex items-baseline justify-between">
+                <div>
+                  <span class="text-2xl font-bold text-[#1a1a1a]">€39,90</span>
+                  <span class="text-sm text-gray-400 line-through ml-2">€49,90</span>
+                </div>
+                <span class="text-xs text-gray-500 group-hover:text-[#1a1a1a] transition-colors">Details →</span>
+              </div>
+            </div>
+          </div>
+        </a>
+
       </div>
     </div>
+  </section>
 
-    <div class="bg-gray-50 py-16">
-      <div class="max-w-7xl mx-auto px-6">
-        <h2 class="text-2xl font-bold text-[#1a1a1a] mb-8 text-center">Warum An & Guo?</h2>
-        <div class="grid sm:grid-cols-3 gap-8">
-          <div class="text-center">
-            <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center mx-auto mb-4 border border-gray-200">
-              <svg class="w-6 h-6 text-[#166534]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-            </div>
-            <h3 class="font-semibold text-[#1a1a1a] mb-2">Deutsche Qualität</h3>
-            <p class="text-sm text-gray-600">Hochwertige Materialien und strenge Qualitätskontrollen.</p>
-          </div>
-          <div class="text-center">
-            <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center mx-auto mb-4 border border-gray-200">
-              <svg class="w-6 h-6 text-[#166534]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-            </div>
-            <h3 class="font-semibold text-[#1a1a1a] mb-2">Schneller Versand</h3>
-            <p class="text-sm text-gray-600">Kostenloser Versand ab €20, Lieferung aus Deutschland.</p>
-          </div>
-          <div class="text-center">
-            <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center mx-auto mb-4 border border-gray-200">
-              <svg class="w-6 h-6 text-[#166534]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-            </div>
-            <h3 class="font-semibold text-[#1a1a1a] mb-2">30-Tage Rückgabe</h3>
-            <p class="text-sm text-gray-600">Kostenlose Rückgabe innerhalb von 30 Tagen.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </main>
+  <script define:vars={{ intimduscheVariants, gusseisenVariants }}>
+    function selectColor(productId, index) {
+      let variant;
+      if (productId === 'intimdusche') {
+        variant = intimduscheVariants[index];
+        document.getElementById('img-intimdusche').src = variant.img;
+        document.getElementById('price-intimdusche').textContent = variant.price;
+        const swatches = document.getElementById('swatches-intimdusche').children;
+        Array.from(swatches).forEach((btn, i) => {
+          btn.classList.toggle('active', i === index);
+        });
+      } else if (productId === 'gusseisen') {
+        variant = gusseisenVariants[index];
+        document.getElementById('img-gusseisen').src = variant.img;
+        document.getElementById('price-gusseisen').textContent = variant.price;
+        document.getElementById('orig-gusseisen').textContent = variant.orig;
+        const swatches = document.getElementById('swatches-gusseisen').children;
+        Array.from(swatches).forEach((btn, i) => {
+          btn.classList.toggle('active', i === index);
+        });
+      }
+    }
+    window.selectColor = selectColor;
+  </script>
 </BaseLayout>

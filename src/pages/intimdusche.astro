@@ -2,8 +2,38 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 
 const variants = [
-  { asin: 'B0F28TW95V', color: 'Rot', price: '€9,90', image: 'img/B0F28TW95V/B0F28TW95V_main.jpg' },
-  { asin: 'B0F28T7WFL', color: 'Blau', price: '€9,90', image: 'img/B0F28T7WFL/B0F28T7WFL_main.jpg' }
+  {
+    asin: 'B0F28TW95V',
+    color: 'Rot',
+    colorHex: '#dc2626',
+    price: '€9,90',
+    images: [
+      '/img/B0F28TW95V/B0F28TW95V_main.jpg',
+      '/img/B0F28TW95V/B0F28TW95V_alt1.jpg',
+      '/img/B0F28TW95V/B0F28TW95V_alt2.jpg',
+      '/img/B0F28TW95V/B0F28TW95V_alt3.jpg',
+      '/img/B0F28TW95V/B0F28TW95V_alt4.jpg',
+      '/img/B0F28TW95V/B0F28TW95V_alt5.jpg',
+      '/img/B0F28TW95V/B0F28TW95V_alt6.jpg',
+      '/img/B0F28TW95V/B0F28TW95V_alt7.jpg'
+    ]
+  },
+  {
+    asin: 'B0F28T7WFL',
+    color: 'Blau',
+    colorHex: '#2563eb',
+    price: '€9,90',
+    images: [
+      '/img/B0F28T7WFL/B0F28T7WFL_main.jpg',
+      '/img/B0F28T7WFL/B0F28T7WFL_alt1.jpg',
+      '/img/B0F28T7WFL/B0F28T7WFL_alt2.jpg',
+      '/img/B0F28T7WFL/B0F28T7WFL_alt3.jpg',
+      '/img/B0F28T7WFL/B0F28T7WFL_alt4.jpg',
+      '/img/B0F28T7WFL/B0F28T7WFL_alt5.jpg',
+      '/img/B0F28T7WFL/B0F28T7WFL_alt6.jpg',
+      '/img/B0F28T7WFL/B0F28T7WFL_alt7.jpg'
+    ]
+  }
 ];
 
 const features = [
@@ -26,7 +56,7 @@ const jsonLd = {
   "@type": "Product",
   "name": "Po Dusche / Intimdusche kaufen | BPA-frei, tragbar | An & Guo",
   "description": "Po Dusche und Intimdusche aus BPA-freiem medizinischem Silikon. 360ml, ergonomisches Design, inklusive Tragetasche. Ideal für Intimhygiene und unterwegs.",
-  "image": "img/B0F28TW95V/B0F28TW95V_main.jpg",
+  "image": "/img/B0F28TW95V/B0F28TW95V_main.jpg",
   "brand": { "@type": "Brand", "name": "An & Guo" },
   "offers": {
     "@type": "Offer",
@@ -58,27 +88,48 @@ const jsonLd = {
 
     <div class="max-w-7xl mx-auto px-6 py-12 md:py-20">
       <div class="grid lg:grid-cols-2 gap-12 lg:gap-16">
+
+        <!-- Left: Image Gallery -->
         <div class="space-y-4">
-          <div id="main-image-container" class="aspect-square bg-white rounded-2xl flex items-center justify-center border border-gray-100">
-            <img id="main-image" src={variants[0].image} alt="Po Dusche / Intimdusche" class="w-full h-full object-contain p-8">
+          <div class="aspect-square bg-white rounded-2xl flex items-center justify-center relative overflow-hidden border border-gray-100">
+            <img id="main-image" src={variants[0].images[0]} alt="Po Dusche / Intimdusche" class="w-full h-full object-contain p-8">
+            <button id="prev-btn" class="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center hover:shadow-xl transition-shadow opacity-80 hover:opacity-100">
+              <svg class="w-5 h-5 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+            </button>
+            <button id="next-btn" class="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center hover:shadow-xl transition-shadow opacity-80 hover:opacity-100">
+              <svg class="w-5 h-5 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+            </button>
           </div>
-          <div id="thumbs" class="flex gap-2 flex-wrap">
-            {variants.map((v, i) => (
-              <button
-                onclick={`switchVariant(${i})`}
-                class="thumb-btn w-16 h-16 rounded-lg border-2 border-gray-200 overflow-hidden"
-                data-index={i}
-              >
-                <img src={v.image} alt={v.color} class="w-full h-full object-cover">
-              </button>
-            ))}
+          <div id="thumbs" class="flex gap-2 overflow-x-auto pb-2">
+            {variants.map((v, vi) =>
+              v.images.map((img, i) => (
+                <button
+                  onclick={`selectImage(${vi}, ${i})`}
+                  class={`thumb-btn flex-shrink-0 w-16 h-16 rounded-lg border-2 border-gray-200 overflow-hidden ${vi === 0 && i === 0 ? 'border-[#1a1a1a]' : 'border-transparent'}`}
+                  data-variant={vi}
+                  data-index={i}
+                >
+                  <img src={img} alt={`Bild ${i + 1}`} class="w-full h-full object-cover">
+                </button>
+              ))
+            )}
           </div>
         </div>
 
+        <!-- Right: Product Info -->
         <div class="lg:py-4">
           <p class="text-xs text-gray-500 uppercase tracking-wide mb-2">Körperpflege</p>
           <h1 class="text-3xl md:text-4xl font-bold text-[#1a1a1a] leading-tight mb-2">Po Dusche / Intimdusche</h1>
           <p class="text-lg text-gray-600 mb-6">BPA-frei, ergonomisch, mit Tragetasche – für eine sanfte und hygienische Intimreinigung</p>
+
+          <div class="flex items-center gap-2 mb-6">
+            <div class="flex gap-0.5">
+              {[1,2,3,4,5].map(() => (
+                <svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+              ))}
+            </div>
+            <span class="text-sm text-gray-600">5,0 von 5 (4 Bewertungen)</span>
+          </div>
 
           <div class="mb-6">
             <p class="text-sm text-gray-600 mb-3">Farbe: <span id="color-name" class="font-medium text-[#1a1a1a]">{variants[0].color}</span></p>
@@ -86,8 +137,8 @@ const jsonLd = {
               {variants.map((v, i) => (
                 <button
                   onclick={`selectVariant(${i})`}
-                  class="color-btn w-10 h-10 rounded-full border-2 border-gray-200"
-                  style={`background-color: ${v.color === 'Rot' ? '#dc2626' : '#2563eb'}`}
+                  class="color-btn w-10 h-10 rounded-full border-2 border-gray-200 transition-all"
+                  style={`background-color: ${v.colorHex}`}
                   title={v.color}
                 />
               ))}
@@ -101,11 +152,11 @@ const jsonLd = {
             <p class="text-sm text-gray-500 mt-2">inkl. MwSt.</p>
           </div>
 
-          <a id="buy-btn" href={`https://www.amazon.de/dp/${variants[0].asin}`} target="_blank" rel="noopener" class="flex items-center justify-center gap-3 w-full bg-[#166534] text-white py-4 rounded-xl font-medium hover:opacity-90 transition-opacity">
+          <a id="buy-btn" href={`https://www.amazon.de/dp/${variants[0].asin}`} target="_blank" rel="noopener" class="flex items-center justify-center gap-3 w-full bg-[#166534] text-white py-4 rounded-xl font-medium hover:opacity-90 transition-opacity mb-6">
             Bei Amazon kaufen
           </a>
 
-          <div class="mt-8">
+          <div>
             <h2 class="text-lg font-semibold text-[#1a1a1a] mb-4">Eigenschaften</h2>
             <ul class="space-y-3">
               {features.map(f => (
@@ -120,9 +171,10 @@ const jsonLd = {
       </div>
     </div>
 
-    <div class="max-w-7xl mx-auto px-6">
+    <!-- Full Width Sections -->
+    <div class="max-w-7xl mx-auto px-6 pb-16">
       <div class="mt-12 pt-8 border-t border-gray-200">
-        <h2 class="text-lg font-semibold text-[#1a1a1a] mb-4">Produktbeschreibung</h2>
+        <h2 class="text-xl font-semibold text-[#1a1a1a] mb-4">Produktbeschreibung</h2>
         <div class="text-sm text-gray-700 space-y-3 max-w-4xl">
           <p>Die An & Guo Intimdusche wurde für eine sanfte und gründliche Intimreinigung entwickelt. Das BPA-freie medizinische Silikon ist sicher für den Körper und leicht zu reinigen.</p>
           <p>Das ergonomische Design liegt gut in der Hand und ermöglicht eine einfache Anwendung. Mit 360ml Füllmenge ist sie ausreichend für eine vollständige Reinigung.</p>
@@ -131,7 +183,7 @@ const jsonLd = {
       </div>
 
       <div class="mt-12 pt-8 border-t border-gray-200">
-        <h2 class="text-lg font-semibold text-[#1a1a1a] mb-4">Anwendungsbereiche</h2>
+        <h2 class="text-xl font-semibold text-[#1a1a1a] mb-4">Anwendungsbereiche</h2>
         <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-4xl">
           <div class="bg-gray-50 rounded-xl p-4">
             <p class="font-semibold text-[#1a1a1a] mb-1">Intimhygiene</p>
@@ -153,7 +205,7 @@ const jsonLd = {
       </div>
 
       <div class="mt-12 pt-8 border-t border-gray-200">
-        <h2 class="text-lg font-semibold text-[#1a1a1a] mb-4">Häufige Fragen</h2>
+        <h2 class="text-xl font-semibold text-[#1a1a1a] mb-4">Häufige Fragen</h2>
         <div class="space-y-3 max-w-3xl">
           {faqs.map(faq => (
             <details class="group border border-gray-200 rounded-xl overflow-hidden">
@@ -168,7 +220,7 @@ const jsonLd = {
       </div>
 
       <div class="mt-12 pt-8 border-t border-gray-200">
-        <h2 class="text-lg font-semibold text-[#1a1a1a] mb-6">Technische Daten</h2>
+        <h2 class="text-xl font-semibold text-[#1a1a1a] mb-6">Technische Daten</h2>
         <div class="bg-white rounded-xl border border-gray-200 overflow-hidden max-w-2xl">
           <dl class="divide-y divide-gray-100">
             {[['Material', 'BPA-freier medizinischer Silikon'], ['Füllmenge', '360ml'], ['Farben', 'Rot, Blau'], ['Gewicht', 'ca. 80g'], ['Inklusive', '2 Aufsätze, Tragetasche'], ['Herkunft', 'Marke: An & Guo']].map(([k, v]) => (
@@ -184,19 +236,56 @@ const jsonLd = {
   </main>
 
   <script define:vars={{ variants }}>
-    function selectVariant(index) {
-      const v = variants[index];
-      document.getElementById('main-image').src = v.image;
+    let currentVariant = 0;
+    let currentImage = 0;
+
+    function selectVariant(vi) {
+      currentVariant = vi;
+      currentImage = 0;
+      updateDisplay();
+    }
+
+    function selectImage(vi, i) {
+      currentVariant = vi;
+      currentImage = i;
+      updateDisplay();
+    }
+
+    function prevImage() {
+      const imgs = variants[currentVariant].images;
+      currentImage = (currentImage - 1 + imgs.length) % imgs.length;
+      updateDisplay();
+    }
+
+    function nextImage() {
+      const imgs = variants[currentVariant].images;
+      currentImage = (currentImage + 1) % imgs.length;
+      updateDisplay();
+    }
+
+    function updateDisplay() {
+      const v = variants[currentVariant];
+      document.getElementById('main-image').src = v.images[currentImage];
       document.getElementById('color-name').textContent = v.color;
       document.getElementById('price').textContent = v.price;
       document.getElementById('buy-btn').href = `https://www.amazon.de/dp/${v.asin}`;
-      document.querySelectorAll('.color-btn').forEach((btn, i) => {
-        btn.classList.toggle('active', i === index);
+
+      document.querySelectorAll('.thumb-btn').forEach(btn => {
+        const vi = parseInt(btn.dataset.variant);
+        const i = parseInt(btn.dataset.index);
+        if (vi === currentVariant && i === currentImage) {
+          btn.classList.add('border-[#1a1a1a]');
+          btn.classList.remove('border-transparent');
+        } else {
+          btn.classList.remove('border-[#1a1a1a]');
+          btn.classList.add('border-transparent');
+        }
       });
     }
-    function switchVariant(index) {
-      selectVariant(index);
-    }
+
+    document.getElementById('prev-btn').addEventListener('click', prevImage);
+    document.getElementById('next-btn').addEventListener('click', nextImage);
+
     selectVariant(0);
   </script>
 </BaseLayout>

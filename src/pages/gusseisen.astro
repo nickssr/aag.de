@@ -2,9 +2,9 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 
 const variants = [
-  { asin: 'B0F23MWKYL', color: 'Schwarz', price: '€45,91', originalPrice: '€49,90', image: 'img/B0F23MWKYL/B0F23MWKYL_main.jpg', colorHex: '#1a1a1a' },
-  { asin: 'B0F3THDT9B', color: 'Meeresblau', price: '€55,11', originalPrice: '€59,90', image: 'img/B0F3THDT9B/B0F3THDT9B_main.jpg', colorHex: '#0ea5e9' },
-  { asin: 'B0F3TFB1VK', color: 'Mintblau', price: '€55,11', originalPrice: '€59,90', image: 'img/B0F3TFB1VK/B0F3TFB1VK_main.jpg', colorHex: '#14b8a6' }
+  { asin: 'B0F23MWKYL', color: 'Schwarz', price: '€45,91', originalPrice: '€49,90', colorHex: '#1a1a1a', images: ['/img/B0F23MWKYL/B0F23MWKYL_main.jpg', '/img/B0F23MWKYL/B0F23MWKYL_alt1.jpg', '/img/B0F23MWKYL/B0F23MWKYL_alt2.jpg', '/img/B0F23MWKYL/B0F23MWKYL_alt3.jpg', '/img/B0F23MWKYL/B0F23MWKYL_alt4.jpg', '/img/B0F23MWKYL/B0F23MWKYL_alt5.jpg', '/img/B0F23MWKYL/B0F23MWKYL_alt6.jpg', '/img/B0F23MWKYL/B0F23MWKYL_alt7.jpg'] },
+  { asin: 'B0F3THDT9B', color: 'Meeresblau', price: '€55,11', originalPrice: '€59,90', colorHex: '#0ea5e9', images: ['/img/B0F3THDT9B/B0F3THDT9B_main.jpg', '/img/B0F3THDT9B/B0F3THDT9B_alt1.jpg', '/img/B0F3THDT9B/B0F3THDT9B_alt2.jpg', '/img/B0F3THDT9B/B0F3THDT9B_alt3.jpg', '/img/B0F3THDT9B/B0F3THDT9B_alt4.jpg', '/img/B0F3THDT9B/B0F3THDT9B_alt5.jpg', '/img/B0F3THDT9B/B0F3THDT9B_alt6.jpg'] },
+  { asin: 'B0F3TFB1VK', color: 'Mintblau', price: '€55,11', originalPrice: '€59,90', colorHex: '#14b8a6', images: ['/img/B0F3TFB1VK/B0F3TFB1VK_main.jpg', '/img/B0F3TFB1VK/B0F3TFB1VK_alt1.jpg', '/img/B0F3TFB1VK/B0F3TFB1VK_alt2.jpg', '/img/B0F3TFB1VK/B0F3TFB1VK_alt3.jpg', '/img/B0F3TFB1VK/B0F3TFB1VK_alt4.jpg', '/img/B0F3TFB1VK/B0F3TFB1VK_alt5.jpg', '/img/B0F3TFB1VK/B0F3TFB1VK_alt6.jpg'] }
 ];
 
 const features = [
@@ -27,7 +27,7 @@ const jsonLd = {
   "@type": "Product",
   "name": "Gusseisen Brotbackform mit Deckel kaufen | 22,96x12,78cm | An & Guo",
   "description": "Gusseisen Brotbackform mit Deckel. 22,96x12,78cm, vorgewürzt, bis 260°C. Perfekt für Sauerteigbrot, Ciabatta und rustikales Bauernbrot.",
-  "image": "img/B0F23MWKYL/B0F23MWKYL_main.jpg",
+  "image": "/img/B0F23MWKYL/B0F23MWKYL_main.jpg",
   "brand": { "@type": "Brand", "name": "An & Guo" },
   "offers": {
     "@type": "Offer",
@@ -61,15 +61,28 @@ const jsonLd = {
     <div class="max-w-7xl mx-auto px-6 py-12 md:py-20">
       <div class="grid lg:grid-cols-2 gap-12 lg:gap-16">
         <div class="space-y-4">
-          <div class="aspect-square bg-white rounded-2xl flex items-center justify-center border border-gray-100">
-            <img id="main-image" src={variants[0].image} alt="Gusseisen Brotbackform" class="w-full h-full object-contain p-8">
+          <div class="aspect-square bg-white rounded-2xl flex items-center justify-center relative overflow-hidden border border-gray-100">
+            <img id="main-image" src={variants[0].images[0]} alt="Gusseisen Brotbackform" class="w-full h-full object-contain p-8">
+            <button id="prev-btn" class="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center hover:shadow-xl transition-shadow opacity-80 hover:opacity-100">
+              <svg class="w-5 h-5 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+            </button>
+            <button id="next-btn" class="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center hover:shadow-xl transition-shadow opacity-80 hover:opacity-100">
+              <svg class="w-5 h-5 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+            </button>
           </div>
-          <div id="thumbs" class="flex gap-2 flex-wrap">
-            {variants.map((v, i) => (
-              <button onclick={`switchVariant(${i})`} class="thumb-btn w-16 h-16 rounded-lg border-2 border-gray-200 overflow-hidden">
-                <img src={v.image} alt={v.color} class="w-full h-full object-cover">
-              </button>
-            ))}
+          <div id="thumbs" class="flex gap-2 overflow-x-auto pb-2">
+            {variants.map((v, vi) =>
+              v.images.map((img, i) => (
+                <button
+                  onclick={`selectImage(${vi}, ${i})`}
+                  class={`thumb-btn flex-shrink-0 w-16 h-16 rounded-lg border-2 overflow-hidden transition-opacity ${vi === 0 ? 'opacity-100' : 'opacity-0 hidden'} ${vi === 0 && i === 0 ? 'border-[#1a1a1a]' : 'border-transparent'}`}
+                  data-variant={vi}
+                  data-index={i}
+                >
+                  <img src={img} alt={`Bild ${i+1}`} class="w-full h-full object-cover">
+                </button>
+              ))
+            )}
           </div>
         </div>
 
@@ -84,7 +97,7 @@ const jsonLd = {
               {variants.map((v, i) => (
                 <button
                   onclick={`selectVariant(${i})`}
-                  class="color-btn w-10 h-10 rounded-full border-2 border-gray-200"
+                  class={`color-btn w-10 h-10 rounded-full border-2 border-gray-200 ${i === 0 ? 'border-[#1a1a1a]' : 'border-transparent'}`}
                   style={`background-color: ${v.colorHex}`}
                   title={v.color}
                 />
@@ -182,20 +195,73 @@ const jsonLd = {
   </main>
 
   <script define:vars={{ variants }}>
-    function selectVariant(index) {
-      const v = variants[index];
-      document.getElementById('main-image').src = v.image;
+    let currentVariant = 0;
+    let currentImage = 0;
+
+    function selectVariant(vi) {
+      currentVariant = vi;
+      currentImage = 0;
+      updateDisplay();
+    }
+
+    function selectImage(vi, i) {
+      currentVariant = vi;
+      currentImage = i;
+      updateDisplay();
+    }
+
+    function prevImage() {
+      const imgs = variants[currentVariant].images;
+      currentImage = (currentImage - 1 + imgs.length) % imgs.length;
+      updateDisplay();
+    }
+
+    function nextImage() {
+      const imgs = variants[currentVariant].images;
+      currentImage = (currentImage + 1) % imgs.length;
+      updateDisplay();
+    }
+
+    function updateDisplay() {
+      const v = variants[currentVariant];
+      document.getElementById('main-image').src = v.images[currentImage];
       document.getElementById('color-name').textContent = v.color;
       document.getElementById('price').textContent = v.price;
       document.getElementById('original-price').textContent = v.originalPrice;
       document.getElementById('buy-btn').href = `https://www.amazon.de/dp/${v.asin}`;
-      document.querySelectorAll('.color-btn').forEach((btn, i) => {
-        btn.classList.toggle('active', i === index);
-        btn.classList.toggle('border-gray-400', i === index);
-        btn.classList.toggle('border-gray-200', i !== index);
+      document.querySelectorAll('.thumb-btn').forEach(btn => {
+        const vi = parseInt(btn.dataset.variant);
+        const i = parseInt(btn.dataset.index);
+        if (vi === currentVariant && i === currentImage) {
+          btn.classList.add('border-[#1a1a1a]');
+          btn.classList.remove('border-transparent');
+        } else {
+          btn.classList.remove('border-[#1a1a1a]');
+          btn.classList.add('border-transparent');
+        }
+        if (vi === currentVariant) {
+          btn.classList.remove('opacity-0', 'hidden');
+          btn.classList.add('opacity-100');
+        } else {
+          btn.classList.add('opacity-0', 'hidden');
+          btn.classList.remove('opacity-100');
+        }
+      });
+      document.querySelectorAll('.color-btn').forEach((btn, idx) => {
+        if (idx === currentVariant) {
+          btn.classList.add('border-[#1a1a1a]');
+          btn.classList.remove('border-transparent');
+        } else {
+          btn.classList.remove('border-[#1a1a1a]');
+          btn.classList.add('border-transparent');
+        }
       });
     }
-    function switchVariant(index) { selectVariant(index); }
+
+    document.getElementById('prev-btn').addEventListener('click', prevImage);
+    document.getElementById('next-btn').addEventListener('click', nextImage);
+    window.selectVariant = selectVariant;
+    window.selectImage = selectImage;
     selectVariant(0);
   </script>
 </BaseLayout>

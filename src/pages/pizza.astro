@@ -2,9 +2,14 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 
 const images = [
-  'img/B0DHZH73KP/B0DHZH73KP_main.jpg',
-  'img/B0DHZH73KP/B0DHZH73KP_alt1.jpg',
-  'img/B0DHZH73KP/B0DHZH73KP_alt2.jpg',
+  '/img/B0DHZH73KP/B0DHZH73KP_main.jpg',
+  '/img/B0DHZH73KP/B0DHZH73KP_alt1.jpg',
+  '/img/B0DHZH73KP/B0DHZH73KP_alt2.jpg',
+  '/img/B0DHZH73KP/B0DHZH73KP_alt3.jpg',
+  '/img/B0DHZH73KP/B0DHZH73KP_alt4.jpg',
+  '/img/B0DHZH73KP/B0DHZH73KP_alt5.jpg',
+  '/img/B0DHZH73KP/B0DHZH73KP_alt6.jpg',
+  '/img/B0DHZH73KP/B0DHZH73KP_alt7.jpg',
 ];
 
 const features = [
@@ -61,12 +66,18 @@ const jsonLd = {
     <div class="max-w-7xl mx-auto px-6 py-12 md:py-20">
       <div class="grid lg:grid-cols-2 gap-12 lg:gap-16">
         <div class="space-y-4">
-          <div class="aspect-square bg-white rounded-2xl flex items-center justify-center border border-gray-100">
+          <div class="aspect-square bg-white rounded-2xl flex items-center justify-center relative overflow-hidden border border-gray-100">
             <img id="main-image" src={images[0]} alt="Pizza Gleitschieber" class="w-full h-full object-contain p-8">
+            <button id="prev-btn" class="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center hover:shadow-xl transition-shadow opacity-80 hover:opacity-100">
+              <svg class="w-5 h-5 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+            </button>
+            <button id="next-btn" class="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center hover:shadow-xl transition-shadow opacity-80 hover:opacity-100">
+              <svg class="w-5 h-5 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+            </button>
           </div>
           <div id="thumbs" class="flex gap-2 flex-wrap">
             {images.map((img, i) => (
-              <button onclick={`switchImage(${i})`} class="thumb-btn w-16 h-16 rounded-lg border-2 border-gray-200 overflow-hidden">
+              <button onclick={`switchImage(${i})`} class={`thumb-btn w-16 h-16 rounded-lg border-2 overflow-hidden ${i === 0 ? 'border-[#1a1a1a]' : 'border-gray-200'}`}>
                 <img src={img} alt="" class="w-full h-full object-cover">
               </button>
             ))}
@@ -152,10 +163,23 @@ const jsonLd = {
       currentIndex = index;
       document.getElementById('main-image').src = images[index];
       document.querySelectorAll('.thumb-btn').forEach((btn, i) => {
-        btn.classList.toggle('border-gray-400', i === index);
-        btn.classList.toggle('border-gray-200', i !== index);
+        if (i === index) {
+          btn.classList.add('border-[#1a1a1a]');
+          btn.classList.remove('border-gray-200');
+        } else {
+          btn.classList.remove('border-[#1a1a1a]');
+          btn.classList.add('border-gray-200');
+        }
       });
     }
+    function prevImage() {
+      switchImage((currentIndex - 1 + images.length) % images.length);
+    }
+    function nextImage() {
+      switchImage((currentIndex + 1) % images.length);
+    }
+    document.getElementById('prev-btn').addEventListener('click', prevImage);
+    document.getElementById('next-btn').addEventListener('click', nextImage);
     switchImage(0);
   </script>
 </BaseLayout>

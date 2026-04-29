@@ -21,7 +21,7 @@ const { title, description = '', keywords = '', canonical = '' } = Astro.props;
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body class="bg-white text-[#1a1a1a] antialiased font-['Inter',sans-serif]">
-  <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-100">
+  <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-200/80">
     <nav class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
       <a href="/" class="text-2xl font-semibold tracking-tight text-[#1a1a1a]">An & Guo</a>
       <div class="flex items-center gap-8">
@@ -32,7 +32,7 @@ const { title, description = '', keywords = '', canonical = '' } = Astro.props;
     </nav>
   </header>
   <slot />
-  <footer class="bg-gray-50 border-t border-gray-200 py-12">
+  <footer class="bg-gray-50 border-t border-gray-200/80 py-12">
     <div class="max-w-7xl mx-auto px-6">
       <div class="flex flex-col md:flex-row items-center justify-between gap-6">
         <div>
@@ -46,7 +46,7 @@ const { title, description = '', keywords = '', canonical = '' } = Astro.props;
           <a href="/ratgeber" class="hover:text-[#1a1a1a] transition-colors">Blog</a>
         </div>
       </div>
-      <div class="mt-8 pt-8 border-t border-gray-200 text-center">
+      <div class="mt-8 pt-8 border-t border-gray-200/80 text-center">
         <p class="text-sm text-gray-500">© 2026 An & Guo. Alle Rechte vorbehalten.</p>
       </div>
     </div>

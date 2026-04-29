@@ -1,0 +1,59 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  return [
+    { params: { slug: 'intimdusche-guide' }, props: { title: 'So wählen Sie die richtige Intimdusche', excerpt: 'Eine Intimdusche sollte BPA-frei, ergonomisch und leicht zu reinigen sein. Hier erfahren Sie, worauf Sie achten müssen.' } },
+    { params: { slug: 'gusseisen-tipps' }, props: { title: 'Brotbacken mit Gusseisen: Tipps für perfekte Kruste', excerpt: 'Gusseisen ist das optimale Material für Brotbackformen. Erfahren Sie hier die besten Tipps für knusprige Kruste und saftige Krume.' } },
+    { params: { slug: 'pizza-guide' }, props: { title: 'Pizza schieben wie ein Profi: Der ultimative Guide', excerpt: 'Mit dem richtigen Pizza Gleitschieber schieben Sie Ihre Pizza wie ein professioneller Pizzabäcker.' } },
+    { params: { slug: 'gusseisen-material' }, props: { title: 'Warum Gusseisen das beste Material für Brotbackformen ist', excerpt: 'Gusseisen vs. Edelstahl vs. Keramik – warum Gusseisen bei Brotbackformen die beste Wahl ist.' } },
+  ];
+}
+
+const { title, excerpt } = Astro.props;
+const { slug } = Astro.params;
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": title,
+  "description": excerpt,
+  "author": { "@type": "Organization", "name": "An & Guo" },
+  "datePublished": "2026-04-01"
+};
+---
+
+<BaseLayout title={`${title} | An & Guo`} description={excerpt}>
+  <main>
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+    <div class="border-b border-gray-100">
+      <div class="max-w-7xl mx-auto px-6 py-4">
+        <nav class="flex items-center gap-2 text-sm text-gray-500">
+          <a href="/" class="hover:text-[#1a1a1a]">Startseite</a>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5l7 7-7 7"/></svg>
+          <a href="/ratgeber" class="hover:text-[#1a1a1a]">Ratgeber</a>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5l7 7-7 7"/></svg>
+          <span class="text-[#1a1a1a]">{title}</span>
+        </nav>
+      </div>
+    </div>
+
+    <article class="max-w-3xl mx-auto px-6 py-16">
+      <header class="mb-12">
+        <h1 class="text-3xl md:text-4xl font-bold text-[#1a1a1a] mb-4">{title}</h1>
+        <p class="text-lg text-gray-600">{excerpt}</p>
+      </header>
+
+      <div class="prose prose-gray text-gray-700 space-y-4">
+        <p>Dieser Artikel folgt in Kürze. Wir arbeiten daran, Ihnen die besten Informationen zu diesem Thema zu liefern.</p>
+        <p>In der Zwischenzeit können Sie unsere Produkte entdecken:</p>
+        <ul>
+          <li><a href="/intimdusche" class="text-[#166534] hover:underline">Intimdusche – BPA-frei und ergonomisch</a></li>
+          <li><a href="/gusseisen" class="text-[#166534] hover:underline">Gusseiserne Brotbackform – für perfektes Brot</a></li>
+          <li><a href="/pizza" class="text-[#166534] hover:underline">Pizza Gleitschieber – fürProfi-Ergebnisse</a></li>
+        </ul>
+      </div>
+    </article>
+  </main>
+</BaseLayout>

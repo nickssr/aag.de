@@ -1,0 +1,29 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout title="Versand & Retoure | An & Guo" description="Informationen zu Versandarten, Lieferzeiten und Rückgabebedingungen bei An & Guo.">
+  <main>
+    <div class="border-b border-gray-100">
+      <div class="max-w-7xl mx-auto px-6 py-4">
+        <nav class="flex items-center gap-2 text-sm text-gray-500">
+          <a href="/" class="hover:text-[#1a1a1a]">Startseite</a>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5l7 7-7 7"/></svg>
+          <span class="text-[#1a1a1a]">Versand & Retoure</span>
+        </nav>
+      </div>
+    </div>
+    <div class="max-w-3xl mx-auto px-6 py-16">
+      <h1 class="text-3xl font-bold text-[#1a1a1a] mb-6">Versand & Retoure</h1>
+      <div class="prose prose-gray text-gray-700 space-y-6">
+        <section>
+          <h2 class="text-xl font-semibold text-[#1a1a1a] mb-3">Versand</h2>
+          <p>Der Versand erfolgt über Amazon. Lieferzeit beträgt 2-5 Werktage. Ab einem Bestellwert von €20 ist der Versand kostenlos.</p>
+        </section>
+        <section>
+          <h2 class="text-xl font-semibold text-[#1a1a1a] mb-3">Retoure</h2>
+          <p>Sie haben das Recht, binnen 30 Tagen ohne Angabe von Gründen den Vertrag zu widerrufen. Die Rückgabe ist kostenlos.</p>
+        </section>
+      </div>
+    </div>
+  </main>
+</BaseLayout>

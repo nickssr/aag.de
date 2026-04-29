@@ -1,0 +1,49 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const articles = [
+  { slug: 'intimdusche-guide', title: 'So wählen Sie die richtige Intimdusche', excerpt: 'Eine Intimdusche sollte BPA-frei, ergonomisch und leicht zu reinigen sein. Hier erfahren Sie, worauf Sie achten müssen.', date: '2026-04-01', coming: false },
+  { slug: 'gusseisen-tipps', title: 'Brotbacken mit Gusseisen: Tipps für perfekte Kruste', excerpt: 'Gusseisen ist das optimale Material für Brotbackformen. Erfahren Sie hier die besten Tipps für knusprige Kruste und saftige Krume.', date: '2026-04-05', coming: false },
+  { slug: 'pizza-guide', title: 'Pizza schieben wie ein Profi: Der ultimative Guide', excerpt: 'Mit dem richtigen Pizza Gleitschieber schieben Sie Ihre Pizza wie ein professioneller Pizzabäcker. Alle Tipps hier.', date: '2026-04-10', coming: false },
+  { slug: 'gusseisen-material', title: 'Warum Gusseisen das beste Material für Brotbackformen ist', excerpt: 'Gusseisen vs. Edelstahl vs. Keramik – warum Gusseisen bei Brotbackformen die beste Wahl ist.', date: '2026-04-15', coming: false },
+];
+---
+
+<BaseLayout
+  title="Ratgeber & Blog | An & Guo"
+  description="Tipps und Ratgeber zu Intimhygiene, Brotbacken und Küchenzubehör von An & Guo."
+>
+  <main>
+    <div class="border-b border-gray-100">
+      <div class="max-w-7xl mx-auto px-6 py-4">
+        <nav class="flex items-center gap-2 text-sm text-gray-500">
+          <a href="/" class="hover:text-[#1a1a1a]">Startseite</a>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5l7 7-7 7"/></svg>
+          <span class="text-[#1a1a1a]">Ratgeber</span>
+        </nav>
+      </div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-6 py-16">
+      <h1 class="text-3xl md:text-4xl font-bold text-[#1a1a1a] mb-2">Ratgeber & Blog</h1>
+      <p class="text-lg text-gray-600 mb-12">Tipps und Informationen zu unseren Produktkategorien.</p>
+
+      <div class="grid sm:grid-cols-2 gap-8">
+        {articles.map(article => (
+          <a href={`/ratgeber/${article.slug}`} class="group block bg-white rounded-2xl border border-gray-200 overflow-hidden hover:shadow-lg transition-shadow">
+            <div class="aspect-video bg-gray-50 flex items-center justify-center">
+              <div class="text-center p-8">
+                <p class="text-4xl font-bold text-gray-300">{article.title.charAt(0)}</p>
+              </div>
+            </div>
+            <div class="p-6">
+              <p class="text-xs text-gray-500 mb-2">{article.date}</p>
+              <h2 class="text-lg font-semibold text-[#1a1a1a] mb-2 group-hover:text-[#166534] transition-colors">{article.title}</h2>
+              <p class="text-sm text-gray-600">{article.excerpt}</p>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </main>
+</BaseLayout>

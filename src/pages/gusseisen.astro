@@ -1,0 +1,201 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const variants = [
+  { asin: 'B0F23MWKYL', color: 'Schwarz', price: '€45,91', originalPrice: '€49,90', image: 'img/B0F23MWKYL/B0F23MWKYL_main.jpg', colorHex: '#1a1a1a' },
+  { asin: 'B0F3THDT9B', color: 'Meeresblau', price: '€55,11', originalPrice: '€59,90', image: 'img/B0F3THDT9B/B0F3THDT9B_main.jpg', colorHex: '#0ea5e9' },
+  { asin: 'B0F3TFB1VK', color: 'Mintblau', price: '€55,11', originalPrice: '€59,90', image: 'img/B0F3TFB1VK/B0F3TFB1VK_main.jpg', colorHex: '#14b8a6' }
+];
+
+const features = [
+  'Schwere Gusseisen-Konstruktion – optimale Wärmespeicherung und gleichmäßige Hitzeverteilung',
+  'Perfekt für Sauerteig- und Artisan-Brot – ideale Kastenform für knusprige Kruste',
+  'Dicht schließender Deckel – simuliert professionelle Backofenumgebung',
+  'Griffige Halterung & einfache Reinigung – seitliche Griffe für sicheren Halt',
+  'Vielseitig einsetzbar: Sandwichbrot, Sauerteigbrot, Pfannkuchen, Steak und mehr',
+  'Vorgewürzt – sofort einsatzbereit, kein lästiges Einbrennen'
+];
+
+const faqs = [
+  { q: 'Gusseisen oder emailliert – was ist besser für Brot?', a: 'Gusseisen bietet bessere Hitzespeicherung und damit gleichmäßigere Ergebnisse.' },
+  { q: 'Muss ich die Form einbrennen?', a: 'Nein, die Form ist bereits vorgewürzt und somit sofort einsatzbereit.' },
+  { q: 'Ist die Form spülmaschinenfest?', a: 'Nein, Gusseisen sollte von Hand mit heißem Wasser gereinigt werden.' }
+];
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "Gusseisen Brotbackform mit Deckel kaufen | 22,96x12,78cm | An & Guo",
+  "description": "Gusseisen Brotbackform mit Deckel. 22,96x12,78cm, vorgewürzt, bis 260°C. Perfekt für Sauerteigbrot, Ciabatta und rustikales Bauernbrot.",
+  "image": "img/B0F23MWKYL/B0F23MWKYL_main.jpg",
+  "brand": { "@type": "Brand", "name": "An & Guo" },
+  "offers": {
+    "@type": "Offer",
+    "price": "45.91",
+    "priceCurrency": "EUR",
+    "availability": "https://schema.org/InStock",
+    "priceValidUntil": "2027-12-31",
+    "seller": { "@type": "Organization", "name": "An & Guo" }
+  }
+};
+---
+
+<BaseLayout
+  title="Gusseisen Brotbackform mit Deckel kaufen | 22,96x12,78cm | An & Guo"
+  description="Gusseisen Brotbackform mit Deckel. 22,96 cm × 12,78 cm, vorgewürzt, bis 260°C Ofen geeignet. Perfekt für Sauerteigbrot, Artisan Brot & Sandwichbrot."
+  canonical="https://aag.de/gusseisen"
+>
+  <main>
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+    <div class="border-b border-gray-100">
+      <div class="max-w-7xl mx-auto px-6 py-4">
+        <nav class="flex items-center gap-2 text-sm text-gray-500">
+          <a href="/" class="hover:text-[#1a1a1a]">Startseite</a>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5l7 7-7 7"/></svg>
+          <span class="text-[#1a1a1a]">Gusseisen Brotbackform</span>
+        </nav>
+      </div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-6 py-12 md:py-20">
+      <div class="grid lg:grid-cols-2 gap-12 lg:gap-16">
+        <div class="space-y-4">
+          <div class="aspect-square bg-white rounded-2xl flex items-center justify-center border border-gray-100">
+            <img id="main-image" src={variants[0].image} alt="Gusseisen Brotbackform" class="w-full h-full object-contain p-8">
+          </div>
+          <div id="thumbs" class="flex gap-2 flex-wrap">
+            {variants.map((v, i) => (
+              <button onclick={`switchVariant(${i})`} class="thumb-btn w-16 h-16 rounded-lg border-2 border-gray-200 overflow-hidden">
+                <img src={v.image} alt={v.color} class="w-full h-full object-cover">
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <div class="lg:py-4">
+          <p class="text-xs text-gray-500 uppercase tracking-wide mb-2">Küche</p>
+          <h1 class="text-3xl md:text-4xl font-bold text-[#1a1a1a] leading-tight mb-2">Gusseisen Brotbackform mit Deckel</h1>
+          <p class="text-lg text-gray-600 mb-6">Perfektes Brot, jedes Mal – vorgewürzt und sofort einsatzbereit</p>
+
+          <div class="mb-6">
+            <p class="text-sm text-gray-600 mb-3">Farbe: <span id="color-name" class="font-medium text-[#1a1a1a]">{variants[0].color}</span></p>
+            <div id="color-buttons" class="flex gap-3">
+              {variants.map((v, i) => (
+                <button
+                  onclick={`selectVariant(${i})`}
+                  class="color-btn w-10 h-10 rounded-full border-2 border-gray-200"
+                  style={`background-color: ${v.colorHex}`}
+                  title={v.color}
+                />
+              ))}
+            </div>
+          </div>
+
+          <div class="py-6 border-y border-gray-100 mb-6">
+            <div class="flex items-baseline gap-3">
+              <span id="price" class="text-4xl font-bold text-[#1a1a1a]">{variants[0].price}</span>
+              <span id="original-price" class="text-xl text-gray-400 line-through">{variants[0].originalPrice}</span>
+            </div>
+            <p class="text-sm text-gray-500 mt-2">inkl. MwSt. · Kostenloser Versand ab €20</p>
+          </div>
+
+          <a id="buy-btn" href={`https://www.amazon.de/dp/${variants[0].asin}`} target="_blank" rel="noopener" class="flex items-center justify-center gap-3 w-full bg-[#166534] text-white py-4 rounded-xl font-medium hover:opacity-90 transition-opacity">
+            Bei Amazon kaufen
+          </a>
+
+          <div class="mt-8">
+            <h2 class="text-lg font-semibold text-[#1a1a1a] mb-4">Eigenschaften</h2>
+            <ul class="space-y-3">
+              {features.map(f => (
+                <li class="flex items-start gap-3">
+                  <svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                  <span class="text-gray-700 text-sm">{f}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="mt-12 pt-8 border-t border-gray-200">
+        <h2 class="text-lg font-semibold text-[#1a1a1a] mb-4">Produktbeschreibung</h2>
+        <div class="text-sm text-gray-700 space-y-3 max-w-4xl">
+          <p>Die gusseiserne Brotbackform von An & Guo verwandelt jeden Backofen in eine professionelle Bäckerei. Dank des schweren Gusseisens wird die Hitze optimal gespeichert und gleichmäßig verteilt.</p>
+          <p>Der dicht schließende Deckel erzeugt eine feuchte Backofenumgebung für eine knusprige Kruste und saftige Krume. Die Form ist bereits vorgewürzt und sofort einsatzbereit.</p>
+        </div>
+      </div>
+
+      <div class="mt-12 pt-8 border-t border-gray-200">
+        <h2 class="text-lg font-semibold text-[#1a1a1a] mb-4">Brotback-Tipps</h2>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-4xl">
+          <div class="bg-gray-50 rounded-xl p-4">
+            <p class="font-semibold text-[#1a1a1a] mb-1">Vor dem Backen</p>
+            <p class="text-sm text-gray-600">Ofen auf 230°C vorheizen, Form 15 Min. mit Deckel darin lassen.</p>
+          </div>
+          <div class="bg-gray-50 rounded-xl p-4">
+            <p class="font-semibold text-[#1a1a1a] mb-1">Während des Backens</p>
+            <p class="text-sm text-gray-600">Nach 30 Min. Deckel abnehmen, weitere 15 Min. für knusprige Kruste.</p>
+          </div>
+          <div class="bg-gray-50 rounded-xl p-4">
+            <p class="font-semibold text-[#1a1a1a] mb-1">Nach dem Backen</p>
+            <p class="text-sm text-gray-600">Brot 10 Min. in der Form ruhen lassen, dann stürzen und abkühlen.</p>
+          </div>
+          <div class="bg-gray-50 rounded-xl p-4">
+            <p class="font-semibold text-[#1a1a1a] mb-1">Pflege & Lagerung</p>
+            <p class="text-sm text-gray-600">Nach Reinigung dünn einölen und trocken lagern. Nicht spülmaschinenfest.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-12 pt-8 border-t border-gray-200">
+        <h2 class="text-lg font-semibold text-[#1a1a1a] mb-4">Häufige Fragen</h2>
+        <div class="space-y-3 max-w-3xl">
+          {faqs.map(faq => (
+            <details class="group border border-gray-200 rounded-xl overflow-hidden">
+              <summary class="flex items-center justify-between p-4 cursor-pointer font-medium text-[#1a1a1a] text-sm">
+                {faq.q}
+                <svg class="w-4 h-4 text-gray-500 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+              </summary>
+              <div class="px-4 pb-4 text-gray-600 text-sm">{faq.a}</div>
+            </details>
+          ))}
+        </div>
+      </div>
+
+      <div class="mt-12 pt-8 border-t border-gray-200">
+        <h2 class="text-lg font-semibold text-[#1a1a1a] mb-6">Technische Daten</h2>
+        <div class="bg-white rounded-xl border border-gray-200 overflow-hidden max-w-2xl">
+          <dl class="divide-y divide-gray-100">
+            {[['Material', 'Gußeisen'], ['Größe', '22,96 × 12,78 cm'], ['Hitzebeständig', 'Bis 260°C'], ['Vorgewürzt', 'Ja'], ['Mit Deckel', 'Ja'], ['Gewicht', '4,2 kg']].map(([k, v]) => (
+              <div class="grid grid-cols-2 px-6 py-4">
+                <dt class="text-sm text-gray-500">{k}</dt>
+                <dd class="text-sm text-[#1a1a1a] font-medium">{v}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script define:vars={{ variants }}>
+    function selectVariant(index) {
+      const v = variants[index];
+      document.getElementById('main-image').src = v.image;
+      document.getElementById('color-name').textContent = v.color;
+      document.getElementById('price').textContent = v.price;
+      document.getElementById('original-price').textContent = v.originalPrice;
+      document.getElementById('buy-btn').href = `https://www.amazon.de/dp/${v.asin}`;
+      document.querySelectorAll('.color-btn').forEach((btn, i) => {
+        btn.classList.toggle('active', i === index);
+        btn.classList.toggle('border-gray-400', i === index);
+        btn.classList.toggle('border-gray-200', i !== index);
+      });
+    }
+    function switchVariant(index) { selectVariant(index); }
+    selectVariant(0);
+  </script>
+</BaseLayout>

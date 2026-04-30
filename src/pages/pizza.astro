@@ -77,7 +77,7 @@ const jsonLd = {
           </div>
           <div id="thumbs" class="flex gap-2 flex-wrap">
             {images.map((img, i) => (
-              <button onclick={`switchImage(${i})`} class={`thumb-btn w-16 h-16 rounded-lg border-2 overflow-hidden ${i === 0 ? 'border-[#1a1a1a]' : 'border-gray-200'}`}>
+              <button onclick={`switchImage(${i})`} class={`thumb-btn w-20 h-20 rounded-lg border-2 overflow-hidden transition-all ${i === 0 ? 'border-[#2C5D3F]' : 'border-[#E0D5C5]'}`}>
                 <img src={img} alt="" class="w-full h-full object-cover">
               </button>
             ))}
@@ -164,11 +164,11 @@ const jsonLd = {
       document.getElementById('main-image').src = images[index];
       document.querySelectorAll('.thumb-btn').forEach((btn, i) => {
         if (i === index) {
-          btn.classList.add('border-[#1a1a1a]');
-          btn.classList.remove('border-gray-200');
+          btn.classList.add('border-[#2C5D3F]');
+          btn.classList.remove('border-[#E0D5C5]');
         } else {
-          btn.classList.remove('border-[#1a1a1a]');
-          btn.classList.add('border-gray-200');
+          btn.classList.remove('border-[#2C5D3F]');
+          btn.classList.add('border-[#E0D5C5]');
         }
       });
     }

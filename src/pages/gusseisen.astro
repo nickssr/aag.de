@@ -75,7 +75,7 @@ const jsonLd = {
               v.images.map((img, i) => (
                 <button
                   onclick={`selectImage(${vi}, ${i})`}
-                  class={`thumb-btn flex-shrink-0 w-16 h-16 rounded-lg border-2 overflow-hidden transition-opacity ${vi === 0 ? 'opacity-100' : 'opacity-0 hidden'} ${vi === 0 && i === 0 ? 'border-[#1a1a1a]' : 'border-transparent'}`}
+                  class={`thumb-btn flex-shrink-0 w-20 h-20 rounded-lg border-2 overflow-hidden transition-opacity ${vi === 0 ? 'opacity-100' : 'opacity-0 hidden'} ${vi === 0 && i === 0 ? 'border-[#2C5D3F]' : 'border-transparent'}`}
                   data-variant={vi}
                   data-index={i}
                 >
@@ -233,10 +233,10 @@ const jsonLd = {
         const vi = parseInt(btn.dataset.variant);
         const i = parseInt(btn.dataset.index);
         if (vi === currentVariant && i === currentImage) {
-          btn.classList.add('border-[#1a1a1a]');
+          btn.classList.add('border-[#2C5D3F]');
           btn.classList.remove('border-transparent');
         } else {
-          btn.classList.remove('border-[#1a1a1a]');
+          btn.classList.remove('border-[#2C5D3F]');
           btn.classList.add('border-transparent');
         }
         if (vi === currentVariant) {
@@ -249,10 +249,10 @@ const jsonLd = {
       });
       document.querySelectorAll('.color-btn').forEach((btn, idx) => {
         if (idx === currentVariant) {
-          btn.classList.add('border-[#1a1a1a]');
+          btn.classList.add('border-[#2C5D3F]');
           btn.classList.remove('border-transparent');
         } else {
-          btn.classList.remove('border-[#1a1a1a]');
+          btn.classList.remove('border-[#2C5D3F]');
           btn.classList.add('border-transparent');
         }
       });

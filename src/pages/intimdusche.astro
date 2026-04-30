@@ -105,7 +105,7 @@ const jsonLd = {
               v.images.map((img, i) => (
                 <button
                   onclick={`selectImage(${vi}, ${i})`}
-                  class={`thumb-btn flex-shrink-0 w-16 h-16 rounded-lg border-2 border-gray-200 overflow-hidden ${vi === 0 && i === 0 ? 'border-[#1a1a1a]' : 'border-transparent'}`}
+                  class={`thumb-btn flex-shrink-0 w-20 h-20 rounded-lg border-2 overflow-hidden transition-all ${vi === 0 && i === 0 ? 'border-[#2C5D3F]' : 'border-transparent'}`}
                   data-variant={vi}
                   data-index={i}
                 >
@@ -137,7 +137,7 @@ const jsonLd = {
               {variants.map((v, i) => (
                 <button
                   onclick={`selectVariant(${i})`}
-                  class="color-btn w-10 h-10 rounded-full border-2 border-gray-200 transition-all"
+                  class={`color-btn w-10 h-10 rounded-full border-2 transition-all ${i === 0 ? 'border-[#2C5D3F]' : 'border-transparent'}`}
                   style={`background-color: ${v.colorHex}`}
                   title={v.color}
                 />
